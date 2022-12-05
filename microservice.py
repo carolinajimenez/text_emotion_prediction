@@ -21,7 +21,7 @@ PORT = 3200
 HOST = "127.0.0.1"
 
 vectorizer = pickle.load(open('models/vectorizer.pickle', 'rb'))
-toxic_classifier = pickle.load(open('models/toxic_classifier.model', 'rb'))
+toxic_classifier = pickle.load(open('models/toxic_linear_classifier.model', 'rb'))
 severe_toxic_classifier = pickle.load(open('models/severe_toxic_classifier.model', 'rb'))
 obscene_classifier = pickle.load(open('models/obscene_classifier.model', 'rb'))
 threat_classifier = pickle.load(open('models/threat_classifier.model', 'rb'))
@@ -29,7 +29,7 @@ insult_classifier = pickle.load(open('models/insult_classifier.model', 'rb'))
 identity_hate_classifier = pickle.load(open('models/identity_hate_classifier.model', 'rb'))
 
 """ pickle.dump(vectorizer, open('models/vectorizer.pickle', 'wb'))
-pickle.dump(toxic_classifier, open('models/toxic_classifier.model', 'wb'))
+pickle.dump(toxic_classifier, open('models/toxic_linear_classifier.model', 'wb'))
 pickle.dump(severe_toxic_classifier, open('models/severe_toxic_classifier.model', 'wb'))
 pickle.dump(obscene_classifier, open('models/obscene_classifier.model', 'wb'))
 pickle.dump(threat_classifier, open('models/threat_classifier.model', 'wb'))
