@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text-based emotion prediction</title>
+  <title>EmotionPrediction</title>
 </head>
 <body>
   <header>
@@ -14,34 +14,40 @@
   <div style="padding: 2px; margin: 5px">
     <div style="display: flex;justify-content: flex-start;align-items: center;">
       <span style="font-size:20px;font-weight: bold;">Entered text:</span>
-      <span style="font-size:18px;padding: 10px;">{{text}}</span>
+      <span style="font-size:18px;padding: 2px 0 0 10px;">{{text}}</span>
     </div>
     <br />
     <div style="display: flex;justify-content: flex-start;align-items: center;">
       <span style="font-size:20px;font-weight: bold;">Inappropriate content:</span>
-      <span style="font-size:18px;padding: 10px;">{{inappropriate}}</span>
+      <span style="font-size:18px;padding: 2px 0 0 10px;">{{inappropriate}}</span>
     </div>
     <br />
     <div style="display: flex;justify-content: flex-start;align-items: center;">
       <span style="font-size:20px;font-weight: bold;">Content category:</span>
       <ul>
-        <li><span style="font-size:19px;font-weight: bold;">Toxic:</span><span style="font-size:18px;padding: 10px;">{{toxic_result}}</span></li>
-        <li><span style="font-size:19px;font-weight: bold;">Severe toxic:</span><span style="font-size:18px;padding: 10px;">{{severe_toxic_result}}</span></li>
-        <li><span style="font-size:19px;font-weight: bold;">Obscene:</span><span style="font-size:18px;padding: 10px;">{{obscene_result}}</span></li>
-        <li><span style="font-size:19px;font-weight: bold;">Threat:</span><span style="font-size:18px;padding: 10px;">{{threat_result}}</span></li>
-        <li><span style="font-size:19px;font-weight: bold;">Insult:</span><span style="font-size:18px;padding: 10px;">{{insult_result}}</span></li>
-        <li><span style="font-size:19px;font-weight: bold;">Identity hate:</span><span style="font-size:18px;padding: 10px;">{{identity_hate_result}}</span></li>
-       </ul>
+        <li><span style="font-size:19px;font-weight: bold;">Toxic:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{toxic_result}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Severe toxic:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{severe_toxic_result}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Obscene:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{obscene_result}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Threat:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{threat_result}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Insult:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{insult_result}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Identity hate:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{identity_hate_result}}</span></li>
+      </ul>
     </div>
     <br />
     <div style="display: flex;justify-content: flex-start;align-items: center;">
       <span style="font-size:20px;font-weight: bold;">Emotion prediction:</span>
-      <span style="font-size:18px;padding: 10px;">{{emotion}}</span>
+      <span style="font-size:18px;padding: 2px 0 0 10px;">{{emotion}}</span>
     </div>
     <br />
     <div style="display: flex;justify-content: flex-start;align-items: center;">
-      <span style="font-size:20px;font-weight: bold;">Entidades encontradas:</span>
-      <span style="font-size:18px;padding: 10px;">{{text}}</span>
+      <span style="font-size:20px;font-weight: bold;">Entities found:</span>
+      <ul>
+        <li><span style="font-size:19px;font-weight: bold;">Countries:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{countries}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Companies:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{companies}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">People:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{people}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Dates:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{dates}}</span></li>
+        <li><span style="font-size:19px;font-weight: bold;">Hours:</span><span style="font-size:18px;padding: 2px 0 0 10px;">{{hours}}</span></li>
+      </ul>
     </div>
   </div>
 </body>
