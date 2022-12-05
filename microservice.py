@@ -21,28 +21,28 @@ PORT = 3200
 HOST = "127.0.0.1"
 
 vectorizer = pickle.load(open('models/vectorizer.pickle', 'rb'))
-toxic_classifier = pickle.load(open('models/toxic_classifier.sav', 'rb'))
-severe_toxic_classifier = pickle.load(open('models/severe_toxic_classifier.sav', 'rb'))
-obscene_classifier = pickle.load(open('models/obscene_classifier.sav', 'rb'))
-threat_classifier = pickle.load(open('models/threat_classifier.sav', 'rb'))
-insult_classifier = pickle.load(open('models/insult_classifier.sav', 'rb'))
-identity_hate_classifier = pickle.load(open('models/identity_hate_classifier.sav', 'rb'))
+toxic_classifier = pickle.load(open('models/toxic_classifier.model', 'rb'))
+severe_toxic_classifier = pickle.load(open('models/severe_toxic_classifier.model', 'rb'))
+obscene_classifier = pickle.load(open('models/obscene_classifier.model', 'rb'))
+threat_classifier = pickle.load(open('models/threat_classifier.model', 'rb'))
+insult_classifier = pickle.load(open('models/insult_classifier.model', 'rb'))
+identity_hate_classifier = pickle.load(open('models/identity_hate_classifier.model', 'rb'))
 
 """ pickle.dump(vectorizer, open('models/vectorizer.pickle', 'wb'))
-pickle.dump(toxic_classifier, open('models/toxic_classifier.sav', 'wb'))
-pickle.dump(severe_toxic_classifier, open('models/severe_toxic_classifier.sav', 'wb'))
-pickle.dump(obscene_classifier, open('models/obscene_classifier.sav', 'wb'))
-pickle.dump(threat_classifier, open('models/threat_classifier.sav', 'wb'))
-pickle.dump(insult_classifier, open('models/insult_classifier.sav', 'wb'))
-pickle.dump(identity_hate_classifier, open('models/identity_hate_classifier.sav', 'wb')) """
+pickle.dump(toxic_classifier, open('models/toxic_classifier.model', 'wb'))
+pickle.dump(severe_toxic_classifier, open('models/severe_toxic_classifier.model', 'wb'))
+pickle.dump(obscene_classifier, open('models/obscene_classifier.model', 'wb'))
+pickle.dump(threat_classifier, open('models/threat_classifier.model', 'wb'))
+pickle.dump(insult_classifier, open('models/insult_classifier.model', 'wb'))
+pickle.dump(identity_hate_classifier, open('models/identity_hate_classifier.model', 'wb')) """
 
 @app.route('/textbased_emotion', methods=['GET'])
 def predict_textbased_emotion():
     if request.method == 'GET':
         text = request.args.get('text')
         if text:
-            text_vector = vectorizer.transform([text])
-            """ toxic_result = toxic_classifier.predict(text_vector)
+            text_vector = vectorizer.fit_transform([text])
+            toxic_result = toxic_classifier.predict(text_vector).toarray()
             severe_toxic_result = severe_toxic_classifier.predict(text_vector)
             obscene_result = obscene_classifier.predict(text_vector)
             threat_result = threat_classifier.predict(text_vector)
@@ -55,16 +55,17 @@ def predict_textbased_emotion():
             its_threat = threat_result[0] == 1
             its_insult = insult_result[0] == 1
             its_identity_hate = identity_hate_result[0] == 1
-            inappropriate = its_toxic and its_severe_toxic and its_obscene and its_threat and its_insult and its_identity_hate """
+            inappropriate = its_toxic and its_severe_toxic and its_obscene and its_threat and its_insult and its_identity_hate
 
-            text_vector  = "text_vector"
+            """ text_vector  = "text_vector"
             toxic_result  = "toxic_result"
             severe_toxic_result  = "severe_toxic_result"
             obscene_result  = "obscene_result"
             threat_result  = "threat_result"
             insult_result  = "insult_result"
             identity_hate_result  = "identity_hate_result"
-            inappropriate = True
+            inappropriate = True """
+
             emotion = "negative" if inappropriate else "positive"
 
             #return make_response(jsonify({'sentiment': result[0], 'text': text, 'status_code':200}), 200)
