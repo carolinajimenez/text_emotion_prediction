@@ -56,25 +56,24 @@ def clean_text(text):
 
 def get_dates(text):
     # dd/mm/yyyy dd-mm-yyyy 
-    search1 = ""
+    search = ""
     vals = re.findall(r"[\d]{1,2}[/-][\d]{1,2}[/-][\d]{2,4}", text)
     print(vals)
     if vals:
-        search1 = vals
+        for i in vals:
+            if search != "":
+                search += ", "
+            search += f"{i}"
         
     # dd MMM yyyy
-    search2 = ""
     vals = re.findall(r"[\d]{1,2} [ADFJMNOS]\w* [\d]{2,4}", text)
     print(vals)
     if vals:
-        search2 = vals
-        
-    search3 = ""
-    vals = re.findall(r"([\d]{1,2}\s(January|February|March|April|May|June|July|August|September|October|November|December)\s[\d]{4})", text)
-    print(vals)
-    if vals:
-        search3 = vals
-    return search1, search2, search3
+        for i in vals:
+            if search != "":
+                search += ", "
+            search += f"{i}"
+    return search
 
 
 def findCountry(stringText):
@@ -153,4 +152,4 @@ def predict_textbased_emotion():
 if __name__ == "__main__":
     print(f"Microserver running in port {PORT}")
     app.run(host=HOST, port=PORT)
-    print("\nGood")
+    print("\nGood bye!")
