@@ -16,6 +16,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 import pycountry
 
+
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
@@ -75,12 +76,15 @@ def get_dates(text):
             search += f"{i}"
     return search
 
-
-def findCountry(stringText):
+def find_country(text):
+    countries = ""
+    print(len(pycountry.countries))
     for country in pycountry.countries:
-        if country.name.lower() == stringText.lower():
-            return country.name
-    return None
+        if country.name in text:
+            if countries != "":
+                countries += ", "
+            countries += country.name
+    return "-" if countries == "" else countries
 
 @app.route('/')
 def home():
@@ -123,7 +127,7 @@ def predict_textbased_emotion():
                 emotion = "negative" if inappropriate else "positive"
                     
             
-            countries = findCountry(text)
+            countries = find_country(text)
             companies = ""
             people = re.findall(r"[A-Z][a-z]+,?\s+(?:[A-Z][a-z]*\.?\s*)?[A-Z][a-z]+", text)
             dates = get_dates(text)
