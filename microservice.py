@@ -8,14 +8,16 @@ __author__ = "Carolina Jiménez Moreno <cjimenezm0794@gmail.com>"
 __version__ = "1.0.0"
 
 # Standard library imports.
+import re
 import json
 import pickle
 # Third party imports.
+import nltk
+from nltk import ne_chunk, pos_tag, word_tokenize
+from nltk.tree import Tree
+import pycountry
 from flask import Flask, render_template, make_response, jsonify, request
 from sklearn.feature_extraction.text import TfidfVectorizer
-import re
-import pycountry
-
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -31,6 +33,7 @@ emotion_classifier = pickle.load(open('models/emotion_classifier.model', 'rb'))
 # threat_classifier = pickle.load(open('models/threat_linear1_classifier.model', 'rb'))
 # insult_classifier = pickle.load(open('models/insult_linear1_classifier.model', 'rb'))
 # identity_hate_classifier = pickle.load(open('models/identity_hate_linear1_classifier.model', 'rb'))
+
 
 def clean_text(text):
     # Lemmatizing the texts
@@ -86,6 +89,21 @@ def find_country(text):
             countries += country.name
     return "-" if countries == "" else countries
 
+def get_people_names(text):
+    names = ""
+    tokens = nltk.word_tokenize(text)
+    tagged = nltk.pos_tag(tokens)
+    for tupla in tagged:
+        if tupla[1] == "NNP":
+            if names != "":
+                names += ", "
+            names += tupla[0]
+    return names
+
+
+
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -125,12 +143,26 @@ def predict_textbased_emotion():
                 emotion = emotion_classifier.predict(text_vector)[0]
             except Exception:
                 emotion = "negative" if inappropriate else "positive"
-                    
-            
-            countries = find_country(text)
+
             companies = ""
-            people = re.findall(r"[A-Z][a-z]+,?\s+(?:[A-Z][a-z]*\.?\s*)?[A-Z][a-z]+", text)
+            countries = find_country(text)
+            paises = countries.split(', ')
+            
+            names = get_people_names(text)
+            print(names)
+            for p in paises:
+                names = names.replace(p, "")
+            print(names)
+            
             dates = get_dates(text)
+            fechas = dates.split(', ')
+            for f in fechas:
+                names = names.replace(f, "")
+            people = names
+            
+
+            #people = re.findall(r"[A-Z][a-z]+,?\s+(?:[A-Z][a-z]*\.?\s*)?[A-Z][a-z]+", text)
+
             hours = ""
 
             #return make_response(jsonify({'sentiment': result[0], 'text': text, 'status_code':200}), 200)
